@@ -1,11 +1,16 @@
 const express=require("express")
+const cors=require("cors")
 const app=express()
+const {authenticate}=require("./middleware/authonticate.middleware")
 const {connection}=require("./config/database")
 const {userRouter}=require("./routes/User.route")
 const {PRouter}=require("./routes/products.route")
+app.use(cors())
 app.use(express.json())
+
 app.use("/user",userRouter)
 app.use("/product",PRouter)
+
 app.get("/",(req,res)=>{
 res.send("home")
 })
